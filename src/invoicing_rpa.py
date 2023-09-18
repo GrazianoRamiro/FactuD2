@@ -53,7 +53,7 @@ class InvoicingRPA:
             invoice.get("CUIT", ""), invoice.get("CONDITION", "")
         )
         self.step_operation_details(invoice.get("AMOUNT", ""))
-        # self.step_generate()
+        self.step_generate()
 
     def step_generate_receipt(self):
         self.rpa.find_and_click("a", "id", elements["btn_gen_receipts"])
