@@ -1,3 +1,6 @@
 clients.csv
 account.csv
 company.csv
+.env
+__pycache__
+.vscode
