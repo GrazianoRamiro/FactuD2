@@ -19,20 +19,20 @@ Para poder correr el script, necesitamos:
   - pandas
 
 - CSV con nombre "account" con usuario y contraseña en la misma carpeta que nuestro script, con el formato:
-  CUIL       | PASSWORD
-  {Nro Cuil} | {Password}
+  CUIT       | PASSWORD
+  {Nro CUIT} | {Password}
 - CSV con nombre "clients" con clientes a facturar en la misma carpeta que nuestro script, con el formato:
-  CUIL       | CONDICION
-  {Nro Cuil} | {Nro Condicion}
-  {Nro Cuil} | {Nro Condicion}
-  {Nro Cuil} | {Nro Condicion}
+  CUIT       | CONDICION
+  {Nro CUIT} | {Nro Condicion}
+  {Nro CUIT} | {Nro Condicion}
+  {Nro CUIT} | {Nro Condicion}
 ### Los numeros de condicion para tener referencia son:
 ### Responsable Inscripto = 1
 ### Consumidor Final = 3
 - CSV con nombre "company" con el nombre de la entidad para la cual generas las facturas con el formato:
   COMPANY
   {Nombre de la entidad}
-### Si queremos hacer una factura a consumidor final sin especificar a quien, dejamos el Nro de Cuil vacio y Condicion = 3
+### Si queremos hacer una factura a consumidor final sin especificar a quien, dejamos el Nro de CUIT vacio y Condicion = 3
 
 # Installation
 
