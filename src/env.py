@@ -9,3 +9,10 @@ config = {
     "INVOICING_COMPANY": os.getenv("INVOICING_COMPANY"),
     "INVOICING_URL": os.getenv("INVOICING_URL"),
 }
+
+constants = {
+    "sales_point_index": "1",
+    "concept_services_index": "2",
+    "service_description": "Servicios Informaticos",
+    "unit_of_measure_units_index": "7",
+}
