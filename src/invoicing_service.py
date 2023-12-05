@@ -1,6 +1,8 @@
+import datetime
 import math
 import numpy as np
 import pandas as pd
+from env import config
 
 from invoicing_rpa import InvoicingRPA
 
@@ -8,10 +10,7 @@ from invoicing_rpa import InvoicingRPA
 class InvoicingService:
     @classmethod
     def anonymous_invoicing(cls):
-        try:
-            amount = int(input("\nPlease enter amount to invoice: "))
-        except ValueError:
-            print("That's not a valid amount!")
+        amount = int(input("\nPlease enter amount to invoice: "))
 
         invoices = InvoicingService.calculate_invoices(amount)
 
@@ -25,14 +24,32 @@ class InvoicingService:
                 print("Aborting...")
                 break
             elif proceed == "y" or proceed == "":
+                print("\nPlease choose the invoicing month:")
+                print("1. Current Month (default)")
+                print("2. Last Month")
+
+                choice = input("\nEnter the number of your choice: ")
+                invoice_last_month = choice == "2"
+
+                if invoice_last_month:
+                  date = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+                else:
+                  date = datetime.datetime.now()
+
                 print("Starting...")
 
                 invoicingRPA = InvoicingRPA()
                 invoicingRPA.log_in()
 
                 for invoice_amount in invoices:
-                    invoicingRPA.generate_invoice({"AMOUNT": invoice_amount})
+                    invoicingRPA.generate_invoice(
+                        {
+                            "AMOUNT": invoice_amount,
+                            "INVOICE_DATE": date,
+                        }
+                    )
 
+                print("Done!")
                 break
 
     @classmethod
