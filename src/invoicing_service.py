@@ -64,7 +64,7 @@ class InvoicingService:
 
     @classmethod
     def calculate_invoices(cls, amount):
-        invoice_limit = 45000
+        invoice_limit = int(config["INVOICING_LIMIT"])
         invoices_quantity = math.floor(amount / invoice_limit)
 
         invoices = []
@@ -72,6 +72,9 @@ class InvoicingService:
         for _ in np.arange(0, invoices_quantity):
             invoices.append(invoice_limit)
 
-        invoices.append(amount - invoice_limit * invoices_quantity)
+        remaining_amount = amount - invoice_limit * invoices_quantity
+
+        if remaining_amount > 0:
+            invoices.append(amount - invoice_limit * invoices_quantity)
 
         return invoices
