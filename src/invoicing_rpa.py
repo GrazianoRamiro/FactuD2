@@ -1,3 +1,4 @@
+import datetime
 from rpa import RPA
 from env import config, constants
 import time
@@ -48,12 +49,13 @@ class InvoicingRPA:
     def generate_invoice(self, invoice):
         self.step_generate_receipt()
         self.step_sales_point()
-        self.step_emission_details()
+        self.step_emission_details(invoice.get("INVOICE_DATE", datetime.datetime.now()))
         self.step_recipient_details(
             invoice.get("CUIT", ""), invoice.get("CONDITION", "")
         )
         self.step_operation_details(invoice.get("AMOUNT", ""))
         self.step_generate()
+        self.return_to_main_menu()
 
     def step_generate_receipt(self):
         self.rpa.find_and_click("a", "id", elements["btn_gen_receipts"])
@@ -65,16 +67,15 @@ class InvoicingRPA:
         )
         time.sleep(0.9)
         sales_point_input.select_by_index(constants["sales_point_index"])
-        time.sleep(0.5)
+        time.sleep(2)
         self.next_step()
 
-    def step_emission_details(self):
+    def step_emission_details(self, date):
         concept_input = self.rpa.find("select", "id", elements["select_concept"])
         concept_input.select_by_index(constants["concept_services_index"])
         time.sleep(0.5)
 
-        start_date, end_date = get_start_and_end_of_month()
-
+        start_date, end_date = get_start_and_end_of_month(date)
         start_date_input = self.rpa.find("input", "id", elements["input_start_date"])
         start_date_input.clear()
         start_date_input.send_keys(start_date)

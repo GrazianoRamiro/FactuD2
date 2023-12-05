@@ -8,6 +8,7 @@ config = {
     "INVOICING_PASSWORD": os.getenv("INVOICING_PASSWORD"),
     "INVOICING_COMPANY": os.getenv("INVOICING_COMPANY"),
     "INVOICING_URL": os.getenv("INVOICING_URL"),
+    "INVOICING_LIMIT": os.getenv("INVOICING_LIMIT"),
 }
 
 constants = {
